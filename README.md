@@ -38,3 +38,5 @@ python3 ncd.py --custom_run cub --mode train --model_name resnet_fgvc --method g
 python3 ncd.py --custom_run cars --mode train --model_name resnet_fgvc --method gp --cls_num_from_json --moco_path /path/to/mocov2/ckpt --label_json_path_train asset/cars_novel_80_train.json --label_json_path_val asset/cars_novel_80_test.json --unlabel_json_path_train asset/cars_novel_20_train.json --unlabel_json_path_val asset/cars_novel_20_test.json
 ```
 
+
+TODO: upload ckpt to google drive
