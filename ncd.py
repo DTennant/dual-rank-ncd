@@ -57,21 +57,12 @@ def train(model, train_loader, labeled_eval_loader, unlabeled_eval_loader, args,
         for batch_idx, ((x, x_bar),  label, idx) in enumerate(train_loader):
             x, x_bar, label = x.to(device), x_bar.to(device), label.to(device)
 
-            # __import__("ipdb").set_trace()
             outs = model(x, use_ranking=False)
             outs_bar = model(x_bar, use_ranking=False)
-            # {
-            # 'output': [
-            #     [lb_logit_g, ul_logit_g, f_g], 
-            #     [lb_logit_p, ul_logit_p, f_p]
-            # ], 
-            # 'out_featmap': [fm_p]
-            # }
 
             # use mask to find labeled classes
             mask_lb = label < args.num_labeled_classes
             
-            # __import__("ipdb").set_trace()
             # --------------------------------------
             # global bce
             out_g, out_g_bar = outs['output'][0], outs_bar['output'][0]
@@ -85,7 +76,6 @@ def train(model, train_loader, labeled_eval_loader, unlabeled_eval_loader, args,
             pstr += f'r:{r:.4f}'
             # --------------------------------------
             # local bce
-            # __import__("ipdb").set_trace()
             out_p, out_p_bar = outs['output'][1], outs['output'][1]
             ub_logits_p, ub_logits_bar_p = out_p[1], out_p_bar[1]
             prob_ub_p, prob_ub_bar_p = F.softmax(ub_logits_p, dim=1), F.softmax(ub_logits_bar_p, dim=1)
@@ -271,7 +261,6 @@ if __name__ == "__main__":
     
     if args.cls_num_from_json:
         import json
-        # __import__("ipdb").set_trace()
         l_json = json.load(open(args.label_json_path_train, 'r')) 
         args.num_labeled_classes = l_json['nr_class']
         u_json = json.load(open(args.unlabel_json_path_train, 'r')) 
