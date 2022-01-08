@@ -23,7 +23,6 @@ class MoCo_R50(nn.Module):
 
         assert moco_path != ''
         state = torch.load(moco_path, map_location='cpu')['state_dict']
-        # __import__("ipdb").set_trace()
         from collections import OrderedDict
         new_dict = OrderedDict()
         for k, v in state.items():
